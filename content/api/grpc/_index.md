@@ -15,6 +15,7 @@ Once that done, you will [call](https://github.com/go-masonry/mortar-demo/blob/m
 
 Workshop API example we will be using.
 
+{{%panel%}}
 ```protobuf
 service Workshop {
   rpc AcceptCar(Car) returns (google.protobuf.Empty);
@@ -23,12 +24,12 @@ service Workshop {
   rpc CarPainted(PaintFinishedRequest) returns (google.protobuf.Empty);
 }
 ```
-
+{{%/panel%}}
 ### Implementing
 
 Once we have our gRPC Server Interfaces generated, we need to implement them.
 In our case we need to implement [this](https://github.com/go-masonry/mortar-demo/blob/master/workshop/api/workshop_grpc.pb.go#L75) generated Interface.
-
+{{%panel%}}
 ```golang
 // WorkshopServer is the server API for Workshop service.
 // All implementations must embed UnimplementedWorkshopServer
@@ -41,10 +42,11 @@ type WorkshopServer interface {
  mustEmbedUnimplementedWorkshopServer()
 }
 ```
-
+{{%/panel%}}
 You can see how it's done in the [app/services/workshop.go](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/services/workshop.go).
 Here is one of the methods
 
+{{%panel%}}
 ```golang
 ...
 func (w *workshopImpl) AcceptCar(ctx context.Context, car *workshop.Car) (*empty.Empty, error) {
@@ -56,6 +58,7 @@ func (w *workshopImpl) AcceptCar(ctx context.Context, car *workshop.Car) (*empty
 }
 ...
 ```
+{{%/panel%}}
 
 ### Registering
 
@@ -64,6 +67,7 @@ Once we have the implementation covered we need to register it. There are severa
 1. Create a function that will return [GRPCServerAPI](https://github.com/go-masonry/mortar/blob/master/interfaces/http/server/interfaces.go#L39).
    {{%notice warning "Important"%}}In this function you must register gRPC Implementation on the provided `grpc.Server`{{%/notice%}}
 
+   {{%panel%}}
    ```golang
     func workshopGRPCServiceAPIs(deps workshopServiceDeps) serverInt.GRPCServerAPI {
      return func(srv *grpc.Server) {
@@ -72,12 +76,14 @@ Once we have the implementation covered we need to register it. There are severa
      }
     }
    ```
+   {{%/panel%}}
 
     You can look [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L42) to understand how it's done in our workshop example.
 
 2. Next, add it to the `groups.GRPCServerAPIs` group as shown [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L25).
    {{%notice info%}}To better understand mortar groups read [here](/fx/groups){{%/notice%}}
 
+   {{%panel%}}
    ```golang
    return fx.Options(
     // GRPC Service APIs registration
@@ -87,15 +93,18 @@ Once we have the implementation covered we need to register it. There are severa
     }),
    ...
    ```
+   {{%/panel%}}
 
    This way you can register multiple gRPC API implementations and they all will be registered in [one place](https://github.com/go-masonry/mortar/blob/master/constructors/partial/httpserver.go#L89).
 
-3. Now we need to add this option to the `Uber-FX` graph, as show [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L39)
-
-    ```golang
-    return fx.New(
-     ...
-     mortar.WorkshopAPIsAndOtherDependenciesFxOption(),
-     ...
-    )
-    ```
+3. Now we need to add this option to the `Uber-FX` graph, as shown [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L39)
+   
+   {{%panel%}}
+   ```golang
+   return fx.New(
+    ...
+    mortar.WorkshopAPIsAndOtherDependenciesFxOption(),
+    ...
+   )
+   ```
+   {{%/panel%}}
