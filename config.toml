@@ -6,4 +6,23 @@ theme = "docuport"
 
 [params]
 color_main="blue"
-color_second="green"
+color_second="#68829E"
+
+
+# Code highlight configuration
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+hl_Lines = ""
+lineNoStart = 1
+lineNos = false
+lineNumbersInTable = true
+noClasses = true
+style = "monokai"
+tabWidth = 2
+
+[[menu.shortcuts]]
+	name = "Github"
+	identifier = "mortar"
+	url = "https://github.com/go-masonry/mortar"
+	weight = 10

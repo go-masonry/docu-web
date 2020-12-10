@@ -4,7 +4,7 @@ date: 2020-12-06T09:43:50+02:00
 draft: true
 ---
 
-Logging is extremely important, that why Golang standard library have [one](https://golang.org/pkg/log/).
+Logging is extremely important, that is why Golang standard library have [one](https://golang.org/pkg/log/).
 However there are better alternatives and it's up to you to choose the one you want.
 You will need to wrap it to implement *Mortar Logger Interface* and you good to go.
 We [already done](https://github.com/go-masonry/bzerolog) that for [zerolog](https://github.com/rs/zerolog).
@@ -36,16 +36,19 @@ Output depends on the implementation, but most of the libraries will output logs
 ## Context
 
 In our opinion you should always have `context.Context` as the first parameter for every **Public Function** you define and **Logger** is not an exception.
-You can read all the reasons for that [here](context.md).
+You can read all the reasons for that [here](/middleware/context).
 
 Since every `Logger` function have a `context.Context` we can extract different information from it (if configured) and *ADD* it to the log entry.
-When you setup a `Logger` instance to be used everywhere in your application, you can provide different `ContextExtractors` and they will enrich your log entry.
+When you setup a `Logger` instance to be used everywhere in your application, you can provide different `ContextExtractor`s and they will enrich your log entry.
+So what is this mysterious `ContextExtractor` ?
 
+{{% notice info%}}**ContextExtractor**
 ```golang
 type ContextExtractor func(ctx context.Context) map[string]interface{}
 ```
+{{%/notice%}}
 
-This is what `ContextExtractor` is all about, a function that accepts a `context.Context` (which is map) and outputs a `JSON` style map.
+It's a function that accepts a `context.Context` (which is map) and outputs a `JSON` style map.
 Each key in the map will be added to the log entry.
 
 This opens a lot of different possibilities
@@ -53,13 +56,13 @@ This opens a lot of different possibilities
 - Add static fields such as [Host, Application Name/Version, etc]
 - Add **Tracing** information
   
-  > {{% alert theme="info" %}}If configured properly through your entire infrastructure, this feature allows you to aggregate all the logs related to a single request across all services.{{% /alert %}}
+  > {{% alert theme="info" %}}If configured properly through your entire infrastructure, this feature allows you to aggregate **ALL the logs** related to a single request across **ALL services**.{{% /alert %}}
 
 - Add dynamic fields from a request, for example `X-Forwarded-For`
 
 ### Registering a `ContextExtractor`
 
-Since Mortar is build with `uber.Fx` it uses `fx.Group` feature to register different `ContextExtractors` regardless of where they are defined.
+Since Mortar is build with `Uber-FX` it uses `fx.Group` feature to register different `ContextExtractor`s regardless of where they are defined.
 Here you can see what are Mortar Logger dependencies
 
 ```golang
@@ -72,7 +75,8 @@ type loggerDeps struct {
 }
 ```
 
-Look at the **Group** Identifier which also have a [group alias](https://github.com/go-masonry/mortar/blob/master/providers/groups/alias.go#L41) for reference purposes.
+Look at the Group Identifier `group:"loggerContextExtractors"` which also have a [group alias](https://github.com/go-masonry/mortar/blob/master/providers/groups/alias.go#L41) for reference purposes.
+
 {{% notice info%}}**"loggerContextExtractors"**
 ```golang
 // LoggerContextExtractors -  Default Logger Context extractors group. Add custom extractors to enrich your logs from context.Context
@@ -80,28 +84,29 @@ LoggerContextExtractors = constructors.FxGroupLoggerContextExtractors
 ```
 {{%/notice%}}
 
-Every `ContextExtractor` known to `uber.Fx` which is labeled with `loggerContextExtractors` will find its way there and will be registered.
-Here is an example from a [Jaeger package](https://github.com/go-masonry/bjaeger/blob/master/utils.go#L25)
+Every `ContextExtractor` known to `Uber-FX` which is labeled with `loggerContextExtractors` will find its way there and will be registered.
 
-```golang
-// TraceInfoContextExtractorFxOption is a preconfigured fx.Option that will allow adding trace info to log entry
-func TraceInfoContextExtractorFxOption() fx.Option {
-	return fx.Provide(
-		fx.Annotated{
+{{%panel theme="info" header="Example: showing how an FX Option is defined in external library"%}}
 
-            Group: groups.LoggerContextExtractors, // <<-- Group Name
-            
-			Target: func() log.ContextExtractor {
-				return TraceInfoExtractorFromContext
-			},
-		},
-	)
-}
-```
+1. Here is an example from a [Jaeger package](https://github.com/go-masonry/bjaeger/blob/master/utils.go#L25)
+  
+    ```golang
+    // TraceInfoContextExtractorFxOption is a preconfigured fx.Option that will allow adding trace info to log entry
+    func TraceInfoContextExtractorFxOption() fx.Option {
+        return fx.Provide(
+            fx.Annotated{
 
-And below you can see how everything is included in the demo application.
+                Group: groups.LoggerContextExtractors, // <<-- Group Name
+                
+                Target: func() log.ContextExtractor {
+                    return TraceInfoExtractorFromContext
+                },
+            },
+        )
+    }
+    ```
 
-- [`app/mortar/logger.go`](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/logger.go#L20)
+2. Demo application shows how it's registered [`app/mortar/logger.go`](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/logger.go#L20)
 
     ```golang [main.go]
     func LoggerFxOption() fx.Option {
@@ -112,7 +117,7 @@ And below you can see how everything is included in the demo application.
     }
     ```
 
-- [`main.go`](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L32)
+3. [`main.go`](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L32) in Demo application, starting it all.
 
     ```golang  
     func createApplication(configFilePath string, additionalFiles []string) *fx.App {
@@ -123,3 +128,5 @@ And below you can see how everything is included in the demo application.
         )
     }
     ```
+
+{{%/panel%}}

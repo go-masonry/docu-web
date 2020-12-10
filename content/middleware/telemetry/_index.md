@@ -10,7 +10,7 @@ This section is about collecting telemetry **data** from your services and softw
 - Prometheus
 - EKS
 
-Mortar have different middleware software to help you with that.
+Mortar have different middleware to help you with that.
 It defines some `Interfaces` and different middleware helpers, but not the implementations.
 Let's break them into 3 different topics
 

@@ -4,3 +4,6 @@
 [submodule "themes/zdoc"]
 	path = themes/zdoc
 	url = https://github.com/zzossig/hugo-theme-zdoc.git
+[submodule "themes/compose"]
+	path = themes/compose
+	url = https://github.com/onweru/compose.git
