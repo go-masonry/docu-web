@@ -8,7 +8,7 @@ Although it's very convenient to use gRPC + gRPC-Gateway to serve RESTful API, y
 
 Mortar provides 2 `fx.Group` for that. [ExternalHTTPHandlers](https://github.com/go-masonry/mortar/blob/master/providers/groups/alias.go#L26) and [ExternalHTTPHandlerFunctions](https://github.com/go-masonry/mortar/blob/master/providers/groups/alias.go#L29), one for `http.Handler` the other for `http.HandlerFunc`.
 
-{{%notice info%}}To better understand mortar groups read [here](/fx/groups){{%/notice%}}
+{{%notice info%}}To better understand Mortar groups read [here](/fx/groups){{%/notice%}}
 
 ### Registering `http.Handler`
 

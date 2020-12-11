@@ -81,7 +81,7 @@ Once we have the implementation covered we need to register it. There are severa
     You can look [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L42) to understand how it's done in our workshop example.
 
 2. Next, add it to the `groups.GRPCServerAPIs` group as shown [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L25).
-   {{%notice info%}}To better understand mortar groups read [here](/fx/groups){{%/notice%}}
+   {{%notice info%}}To better understand Mortar groups read [here](/fx/groups){{%/notice%}}
 
    {{%panel%}}
    ```golang

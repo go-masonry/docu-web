@@ -11,7 +11,7 @@ We will show how you should register it's handlers after you generate them from 
 
 {{%notice%}}Before reading this part get yourself familiar with the gRPC API [counterpart](/api/grpc).{{%/notice%}}
 
-If you read the gRPC part, you simply need to add one [function](https://github.com/go-masonry/mortar-demo/blob/4a178a4540e185341a99388786a26d229422729c/workshop/app/mortar/workshop.go#L49) to `Uber-FX` graph.
+If you read the gRPC part, you simply need to add one [function](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L49) to `Uber-FX` graph.
 This function should return a slice of [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar/blob/master/interfaces/http/server/interfaces.go#L55).
 
 1. Register your `grpc-gateway` generated Handlers
@@ -31,12 +31,12 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://gi
    ```
    {{%/panel%}}
 
-2. Now tell `Uber-FX` about it and make sure it's added to [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar-demo/blob/4a178a4540e185341a99388786a26d229422729c/workshop/app/mortar/workshop.go#L34) group.
+2. Now tell `Uber-FX` about it and make sure it's added to [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L33) group.
    
    {{%notice%}}
    However, in this case our function doesn't return a single value but an array of them.
    By default `Uber-FX` will treat it as an Array of Arrays `[][]GRPCGatewayGeneratedHandlers`.
-   Hence we need to [**flatten**](https://github.com/go-masonry/mortar-demo/blob/4a178a4540e185341a99388786a26d229422729c/workshop/app/mortar/workshop.go#L33) our value.
+   Hence we need to [**flatten**](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L34) our value.
    {{%/notice%}}
 
    {{%panel%}}

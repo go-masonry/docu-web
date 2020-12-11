@@ -45,7 +45,7 @@ Actually the second option is largely encouraged and became a kind of a standard
 - [Tracing](https://github.com/opentracing/opentracing-go/blob/master/gocontext.go) uses context to store a `traceId`, `spanId` and other information.
 - [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway) reverse proxy injects selected `http.Request` headers into the context.
 
-In mortar most Interfaces have a way to leverage on `context.Context` and depending on the package there are different `ContextExtractor` definitions.
+In Mortar most Interfaces have a way to leverage on `context.Context` and depending on the package there are different `ContextExtractor` definitions.
 
 Let's look at Logging as an example
 

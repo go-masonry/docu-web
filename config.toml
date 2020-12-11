@@ -22,7 +22,13 @@ style = "vs"
 tabWidth = 2
 
 [[menu.shortcuts]]
-	name = "Github"
-	identifier = "mortar"
-	url = "https://github.com/go-masonry/mortar"
-	weight = 10
+name = "Github"
+identifier = "mortar"
+url = "https://github.com/go-masonry/mortar"
+weight = 20
+
+[[menu.shortcuts]]
+name = "Demo"
+identifier = "demo"
+url = "https://github.com/go-masonry/mortar-demo"
+weight = 10
