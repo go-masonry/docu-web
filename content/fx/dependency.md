@@ -10,71 +10,72 @@ To explain this better we will do this with a `Notifier` example.
 ### Preparation
 
 1. Define our `Notifier` Interface.
-
-    ```golang
-    type Notifier interface{
-        Alert(ctx context.Context, msg string)
-    }
-    ```
-
+    {{%panel%}}
+```golang
+type Notifier interface{
+    Alert(ctx context.Context, msg string)
+}
+```
+    {{%/panel%}}
 2. Create a dependency "container" for all future dependencies of the `Notifier` implementation and embed `fx.In` into it.
    This will *mark* it and will tell `Uber-FX` to inject all the requested dependencies.
-
-    ```golang
-    // It's not public as you can see
-    type notifierDeps struct {
-        fx.In
-    }
-    ```
+{{%panel%}}
+```golang
+// It's not public as you can see
+type notifierDeps struct {
+    fx.In
+}
+```
+{{%/panel%}}
 
 3. Create an implementation struct.
-
-    ```golang
-    // Notice again that's not public
-    type notifier struct{
-        deps notifierDeps
-    }
-    ```
-
+{{%panel%}}
+```golang
+// Notice again that's not public
+type notifier struct{
+    deps notifierDeps
+}
+```
+{{%/panel%}}
 4. Create a Constructor function that will return `Notifier` implementation as a type.
-
-    ```golang
-    func CreateNotifier(deps notifierDeps) (Notifier,error) {
-        return &notifier(deps:deps), nil
-    }
-    ```
-
+{{%panel%}}
+```golang
+func CreateNotifier(deps notifierDeps) (Notifier,error) {
+    return &notifier(deps:deps), nil
+}
+```
+{{%/panel%}}
 5. Finally implement it.
-
-    ```golang
-    func (n *notifier) Alert(ctx context.Context, msg string) {
-        // alert someone
-    }
-    ```
-
+{{%panel%}}
+```golang
+func (n *notifier) Alert(ctx context.Context, msg string) {
+    // alert someone
+}
+```
+{{%/panel%}}
 ### Usage
 
 Now suppose you want to log every time you alert someone. All you need to do is
 
 1. Add a `log.Logger` dependency to `notifierDeps` struct.
+{{%panel%}}
+```golang
+type notifierDeps struct {
+    fx.In
 
-    ```golang
-    type notifierDeps struct {
-        fx.In
-
-        Logger log.Logger
-    }
-    ```
-
+    Logger log.Logger
+}
+```
+{{%/panel%}}
 2. Use it
-
-    ```golang
-    func (n *notifier) Alert(ctx context.Context, msg string) {
-        n.deps.Logger.WithField("msg", msg).Debug(ctx, "alerting")
-        // alert someone
-    }
-    ```
-
+{{%panel%}}
+```golang
+func (n *notifier) Alert(ctx context.Context, msg string) {
+    n.deps.Logger.WithField("msg", msg).Debug(ctx, "alerting")
+    // alert someone
+}
+```
+{{%/panel%}}
 ### Tests
 
 You are happily using `Notifier` in your application, but what about tests ?
@@ -82,14 +83,14 @@ You know, to test a logic that have `Notifier` as a dependency. `Notifier` will 
 One way to do it is to use [gomock](https://github.com/golang/mock)
 
 1. You can add a comment above the `Notifier` interface
-
-    ```golang
-    //go:generate mockgen -source=notifier.go -destination=mock/notifier_mock.go
-    type Notifier interface{
-        Alert(ctx context.Context, msg string)
-    }
-    ```
-
+{{%panel%}}
+```golang
+//go:generate mockgen -source=notifier.go -destination=mock/notifier_mock.go
+type Notifier interface{
+    Alert(ctx context.Context, msg string)
+}
+```
+{{%/panel%}}
 2. Execute `go generate ./...` and it will generate all the mocks in your application.
 3. Use the generated mock in your tests.
    {{%alert warning%}}Remember not to call a real Notifier Constructor{{%/alert%}}

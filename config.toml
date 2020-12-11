@@ -7,7 +7,7 @@ theme = "docuport"
 [params]
 color_main="blue"
 color_second="#68829E"
-
+disableSearch = true
 
 # Code highlight configuration
 [markup.highlight]
