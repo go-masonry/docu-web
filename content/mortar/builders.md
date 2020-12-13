@@ -2,6 +2,8 @@
 title: "Builder Pattern"
 date: 2020-12-10T13:08:23+02:00
 draft: true
+hide:
+ - nextpage
 ---
 
 You probably used to [Functional Options](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis) pattern.

@@ -2,6 +2,8 @@
 title: "Bricks"
 date: 2020-12-10T13:08:23+02:00
 draft: true
+hide:
+ - nextpage
 ---
 
 When we build software most of us always try to rely on something we or others build before us.

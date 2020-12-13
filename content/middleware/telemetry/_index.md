@@ -4,6 +4,8 @@ date: 2020-12-06T09:43:50+02:00
 draft: true
 ---
 
+{{%notice success%}} This section is a work in progress {{%/notice%}}
+
 This section is about collecting telemetry **data** from your services and software. This data is usually forwarded to different analytic tools such as
 
 - Jaeger

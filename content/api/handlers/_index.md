@@ -1,5 +1,5 @@
 ---
-title: "HTTP Handlers"
+title: "HTTP Handler/Func"
 date: 2020-12-09T10:41:15+02:00
 draft: true
 ---
@@ -16,7 +16,6 @@ To register a new `http.Handler` you need to define how it's going to be served 
 
 1. Create [HTTPHandlerPatternPair](https://github.com/go-masonry/mortar/blob/master/providers/types/http.go#L8)
    
-   {{%panel%}}
    ```golang
    var customHandler http.Handler ...
 
@@ -26,11 +25,10 @@ To register a new `http.Handler` you need to define how it's going to be served 
         Handler: customHandler,
     }
    }
-   ``` 
-   {{%/panel%}}
+   ```
 
 2. Add this pair to the `ExternalHTTPHandlers` group.
-   {{%panel%}}
+   
    ```golang
    var customHandlerOption = fx.Provide(
        fx.Annotated{
@@ -39,10 +37,9 @@ To register a new `http.Handler` you need to define how it's going to be served 
        }
    )
    ```
-   {{%/panel%}}
 
 3. All that's left is to register it into the `Uber-FX` graph
-   {{%panel%}}
+
    ```golang
    return fx.New(
     ...
@@ -50,13 +47,12 @@ To register a new `http.Handler` you need to define how it's going to be served 
     ...
    )
    ```
-   {{%/panel%}}
 
 ### Registering `http.HandlerFunc`
 
 Registering `http.HandlerFunc` is very much similar to [Registering `http.Handler`](#registering-httphandler)
 
-Actually you need to follow the exact same guide and replace **Handler** -> **HandlerFunc**:
+Actually you need to follow the exact same guide and replace **Handler** with **HandlerFunc**:
 
 {{< tabs >}}
     {{< tab "Handler">}}

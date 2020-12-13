@@ -4,7 +4,7 @@ date: 2020-12-09T10:41:15+02:00
 draft: true
 ---
 
-Mortar comes with [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway) which is a reverse-proxy that translates a RESTful HTTP API into gRPC.
+Mortar comes with a [gRPC-Gateway](https://github.com/grpc-ecosystem/grpc-gateway) which is a reverse-proxy that translates a RESTful HTTP API into gRPC.
 We will show how you should register it's handlers after you generate them from the proto files.
 
 ### Register `grpc-gateway` Handlers
@@ -17,7 +17,6 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://gi
 1. Register your `grpc-gateway` generated Handlers
    {{%notice warning "Important" %}}Each handler function must register itself on the provided `runtime.ServeMux`{{%/notice%}}
 
-   {{%panel%}}
    ```golang
    func workshopGRPCGatewayHandlers() []serverInt.GRPCGatewayGeneratedHandlers {
        return []serverInt.GRPCGatewayGeneratedHandlers{
@@ -29,7 +28,6 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://gi
        }
    }
    ```
-   {{%/panel%}}
 
 2. Now tell `Uber-FX` about it and make sure it's added to [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L33) group.
    
@@ -39,7 +37,6 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://gi
    Hence we need to [**flatten**](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L34) our value.
    {{%/notice%}}
 
-   {{%panel%}}
    ```golang
    // GRPC Gateway Generated Handlers registration
    fx.Provide(fx.Annotated{
@@ -47,6 +44,5 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://gi
     Target: workshopGRPCGatewayHandlers,
    })
    ```
-   {{%/panel%}}
 
 3. Finally you need to add the above `fx.Option` to `Uber-FX` graph, as shown [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L39)

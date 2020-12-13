@@ -2,6 +2,8 @@
 title: "Configuration Map"
 date: 2020-12-10T13:08:23+02:00
 draft: true
+hide:
+ - nextpage
 ---
 
 It is good practice to use constants in your code instead of [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming))

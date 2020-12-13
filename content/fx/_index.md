@@ -1,11 +1,11 @@
 ---
-title: "Uber-FX"
+title: "Dependency Injection"
 date: 2020-12-06T10:35:11+02:00
 draft: true
 weight: 80
+hide:
+  - toc
 ---
-
-## Inversion of Control
 
 If you are unfamiliar with the concept please read about [it](https://en.wikipedia.org/wiki/Inversion_of_control).
 
