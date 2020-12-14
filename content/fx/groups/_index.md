@@ -5,9 +5,9 @@ draft: true
 ---
 
 `Uber-FX` [group](https://pkg.go.dev/go.uber.org/fx#hdr-Value_Groups) is a feature that allows you to consume and produce
-multiple values of the same type. This make it easier to influence/configure different instances.
+multiple values of the same type. This makes it easier to influence/configure different instances.
 
-Mortar have different [groups](https://github.com/go-masonry/mortar/blob/master/providers/groups/alias.go), but we will focus on one of them here.
+Mortar has different [groups](https://github.com/go-masonry/mortar/blob/master/providers/groups/alias.go), but we will focus on one of them here.
 
 {{% panel header="Internal HTTP Handlers" %}}
 
@@ -67,7 +67,7 @@ In this example we want to register a new **Internal** [`"/<path>/<pattern>"` ->
     }
     ```
 
-4. Lastly in your application you need to provide the above `InternalSelfHandlersFxOption()` option to `Uber-FX` graph,
+4. Lastly, in your application you need to provide the above `InternalSelfHandlersFxOption()` option to `Uber-FX` graph,
    [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L37) you can see how it's done in the demo.
     ```golang
     return fx.New(
