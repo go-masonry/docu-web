@@ -7,16 +7,16 @@ hide:
 ---
 
 We assume that you, like us, don't expose your services to the world without setting up at least a Load Balancer before it/them.
-Historically when we started building webservices our infrastructure was expecting a single port to forward all the traffic to it from the LoadBalancer.
-When we wanted to use gRPC API as well as REST we still had to expose everything under one port.
+Historically, when we started building webservices, our infrastructure was expecting a single port to forward all the traffic to it from the LoadBalancer.
+When we wanted to use gRPC API, as well as REST, we still had to expose everything under one port.
 Fortunately we weren't the first, and we used this excellent [cmux](https://github.com/soheilhy/cmux) library to solve that problem.
 
 Now, our services were hosted on AWS using [ELB](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html).
-Back then ELB didn't support HTTP/2. However from Nov 2020 AWS [have gRPC support](https://aws.amazon.com/blogs/aws/new-application-load-balancer-support-for-end-to-end-http-2-and-grpc/)...
+Back then, ELB didn't support HTTP/2. However, from Nov 2020 AWS [have gRPC support](https://aws.amazon.com/blogs/aws/new-application-load-balancer-support-for-end-to-end-http-2-and-grpc/)...
 
-GRPC is based on HTTP/2 and that presented some headache... Long story short we switch to [Envoy](https://www.envoyproxy.io/) and made the following changes:
+GRPC is based on HTTP/2 and that presented some headache... Long story short, we switched to [Envoy](https://www.envoyproxy.io/) and made the following changes:
 
-Our services now had 3 listeners and 3 ports respectively.
+Our services now have had 3 listeners and 3 ports respectively.
 
 - GRPC
 - External REST, which is a reverse-proxy to gRPC using [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
@@ -29,7 +29,7 @@ While the first 2 were exposed to the Internet, third one (**Internal**) wasn't.
 Mortar is designed with that in mind. Essentially you create 3 Web Services with 3 ports they listen on.
 If that setup can't work for you, you can still can do everything with [1 listener and 1 port](#one-listener-one-port).
 
-Let's look at some benefits this approach have.
+Let's look at some benefits this approach has.
 
 ### External gRPC and REST
 
