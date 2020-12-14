@@ -5,7 +5,7 @@ draft: true
 ---
 
 We are using this pattern when creating a new `Uber-FX` dependency, it makes it easy adding new external dependencies later when your application evolves.
-To explain this better we will do this with a `Notifier` example.
+To explain this better, we will do this with a `Notifier` example.
 
 ### Preparation
 
@@ -54,7 +54,7 @@ To explain this better we will do this with a `Notifier` example.
 
 ### Usage
 
-Now suppose you want to log every time you alert someone. All you need to do is
+Now, suppose you want to log every time you alert someone. All you need to do is
 
 1. Add a `log.Logger` dependency to `notifierDeps` struct.
 
@@ -78,8 +78,8 @@ Now suppose you want to log every time you alert someone. All you need to do is
 ### Tests
 
 You are happily using `Notifier` in your application, but what about tests ?
-You know, to test a logic that have `Notifier` as a dependency. `Notifier` will probably call an external service which is not available during tests.
-One way to do it is to use [gomock](https://github.com/golang/mock)
+You know, to test a logic that has `Notifier` as a dependency. `Notifier` will probably call an external service, which is not available during tests.
+One way to do it, is to use [gomock](https://github.com/golang/mock)
 
 1. You can add a comment above the `Notifier` interface
 
