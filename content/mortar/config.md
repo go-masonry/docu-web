@@ -28,11 +28,11 @@ mortar:
 ```
 {{%/panel%}}
 
-Every project should have a configuration file, and your is no exception. You can put all your external configuration values
+Every project should have a configuration file, and yours is no exception. You can put all your external configuration values
 in it (or them).
 
 The concept is simple, you use the `Get` function that accepts a key. A key is actually a path within the configuration map.
-Looking at the above example to access gRPC server port you should use the following key.
+Looking at the above example, to access gRPC server port, you should use the following key.
 
 `mortar.server.grpc.port`
 
@@ -49,8 +49,8 @@ Once you `Get` a value with a provided key you can
 
 ## Environment variables
 
-While it depends on the implementation you should assume that if there is an Environment Variable with a *matching* name
-its value going to be used first.
+While it depends on the implementation, you should assume that if there is an Environment Variable with a *matching* name
+its value is going to be used first.
 
 ### Matching Environment Variable names
 
@@ -69,7 +69,7 @@ mortar:
       port: 5380
 ```
 {{%/panel%}}
-Let's say you want to change port value from 5380 to 7777, you can change the file itself. However, you can also override it.
+Let's say you want to change port value from 5380 to 7777. You can change the file itself. However, you can also override it.
 Viper allows you to override configuration values with a matching Environment Variable. In our case:
 
 {{%panel%}}
@@ -93,6 +93,6 @@ In [this](https://github.com/go-masonry/mortar/blob/master/mortar/keys.go) file 
 
 ## Config format
 
-While in this example we showed you `config.yml` in YAML format you can choose what ever works for you as long as the provided `Config` implementation knows how to read it and will abstract every key to be queried in this form:
+While in this example we showed you `config.yml` in YAML format, you can choose whatever works for you, as long as the provided `Config` implementation knows how to read it and will abstract every key to be queried in this form:
 
 `root.child.childOfChild`
