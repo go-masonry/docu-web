@@ -6,11 +6,11 @@ hide:
  - nextpage
 ---
 
-It is good practice to use constants in your code instead of [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming))
-and it's even better to set them outside your code either by providing a config file or reading from Environment variable.
-Mortar have a `Config` interface that is used everywhere to read external configurations.
-While Mortar can be configured explicitly and that gives you total control over it. It is much comfortable to use its defaults.
-To read them Mortar expects a dedicated Configuration key called **mortar**
+It is good practice to use constants in your code instead of [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming)),
+and it's even better to set them outside your code, either by providing a config file or reading from an environment variable.
+Mortar has a `Config` interface that is used everywhere to read external configurations.
+While Mortar can be configured explicitly, and that gives you total control over it, it is much comfortable to use its defaults.
+To read them, Mortar expects a dedicated configuration key called **mortar**:
 
 {{%panel%}}
 ```yaml
@@ -32,16 +32,16 @@ Every project should have a configuration file, and yours is no exception. You c
 in it (or them).
 
 The concept is simple, you use the `Get` function that accepts a key. A key is actually a path within the configuration map.
-Looking at the above example, to access gRPC server port, you should use the following key.
+Looking at the above example, to access the gRPC server port, you should use the following key:
 
 `mortar.server.grpc.port`
 
-{{%notice%}}Default delimiter is `.` but if needed it can be changed, with a proper PR{{%/notice%}}
+{{%notice%}}The default delimiter is `.` but if needed it can be changed, with a proper PR{{%/notice%}}
 
-Once you `Get` a value with a provided key you can
+Once you `Get` a value with a provided key you can:
 
-- Check if it was set `value.IsSet() bool`
-- Cast it to a type
+- Check if it was set `value.IsSet() bool`.
+- Cast it to a type:
   - `Bool() bool`
   - `Int() int`
   - `StringMapStringSlice() map[string][]string`
@@ -49,17 +49,17 @@ Once you `Get` a value with a provided key you can
 
 ## Environment variables
 
-While it depends on the implementation, you should assume that if there is an Environment Variable with a *matching* name
+While it depends on the implementation, you should assume that if there is an environment variable with a *matching* name,
 its value is going to be used first.
 
-### Matching Environment Variable names
+### Matching environment variable names
 
-As mentioned previously default delimiter is `.` however when naming Environment variables you can't use `.`.
-It is expected, that chosen Implementation will allow you to configure a delimiter *replacer*.
-If you choose to use [viper](https://github.com/spf13/viper) using [brick wrapper](https://github.com/go-masonry/bviper).
-By default, there is a replacer that will replace `_` delimiter to `.` used in our code.
+As mentioned previously, the default delimiter is `.`. However, when naming environment variables you can't use `.`.
+It is expected the that chosen implementation will allow you to configure a delimiter *replacer*.
+If you choose to use [viper](https://github.com/spf13/viper) using [brick wrapper](https://github.com/go-masonry/bviper),
+by default there is a replacer that will replace the `_` delimiter to `.` used in our code.
 
-This is better explained with an example. Look at the map below.
+This is better explained with an example. Look at the map below:
 
 {{%panel%}}
 ```yaml
@@ -70,18 +70,18 @@ mortar:
 ```
 {{%/panel%}}
 Let's say you want to change port value from 5380 to 7777. You can change the file itself. However, you can also override it.
-Viper allows you to override configuration values with a matching Environment Variable. In our case:
+Viper allows you to override configuration values with a matching environment variable. In our case:
 
 {{%panel%}}
 ```shell script
 export MORTAR_SERVER_GRPC_PORT="7777"
 ```
 {{%/panel%}}
-When you want to read gRPC server port value in your code you should use this as a key.
+When you want to read the gRPC server port value in your code, you should use this as a key:
 
 `mortar.server.grpc.port`
 
-Viper will look for Environment variable by replacing `_` with `.` case-insensitive **first** and return its value if set.
+Viper will look for an environment variable by replacing `_` with `.` case-insensitive **first** and return its value if set.
 
 ## Mortar Keys
 

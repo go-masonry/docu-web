@@ -9,7 +9,7 @@ To explain this better, we will do this with a `Notifier` example.
 
 ### Preparation
 
-1. Define our `Notifier` Interface.
+1. Define our `Notifier` interface:
 
     ```golang
     type Notifier interface{
@@ -18,7 +18,7 @@ To explain this better, we will do this with a `Notifier` example.
     ```
 
 2. Create a dependency "container" for all future dependencies of the `Notifier` implementation and embed `fx.In` into it.
-   This will *mark* it and will tell `Uber-FX` to inject all the requested dependencies.
+   This will *mark* it and will tell `Uber-FX` to inject all the requested dependencies:
 
     ```golang
     // It's not public as you can see
@@ -27,7 +27,7 @@ To explain this better, we will do this with a `Notifier` example.
     }
     ```
 
-3. Create an implementation struct.
+3. Create an implementation struct:
 
     ```golang
     // Notice again that's not public
@@ -36,7 +36,7 @@ To explain this better, we will do this with a `Notifier` example.
     }
     ```
 
-4. Create a Constructor function that will return `Notifier` implementation as a type.
+4. Create a Constructor function that will return a `Notifier` implementation as a type:
 
     ```golang
     func CreateNotifier(deps notifierDeps) (Notifier,error) {
@@ -44,7 +44,7 @@ To explain this better, we will do this with a `Notifier` example.
     }
     ```
 
-5. Finally implement it.
+5. Finally, implement it:
 
     ```golang
     func (n *notifier) Alert(ctx context.Context, msg string) {
@@ -54,9 +54,9 @@ To explain this better, we will do this with a `Notifier` example.
 
 ### Usage
 
-Now, suppose you want to log every time you alert someone. All you need to do is
+Now, suppose you want to log every time you alert someone. All you need to do is:
 
-1. Add a `log.Logger` dependency to `notifierDeps` struct.
+1. Add a `log.Logger` dependency to the `notifierDeps` struct:
 
     ```golang
     type notifierDeps struct {
@@ -66,7 +66,7 @@ Now, suppose you want to log every time you alert someone. All you need to do is
     }
     ```
 
-2. Use it
+2. Use it:
 
     ```golang
     func (n *notifier) Alert(ctx context.Context, msg string) {
@@ -77,11 +77,11 @@ Now, suppose you want to log every time you alert someone. All you need to do is
 
 ### Tests
 
-You are happily using `Notifier` in your application, but what about tests ?
-You know, to test a logic that has `Notifier` as a dependency. `Notifier` will probably call an external service, which is not available during tests.
-One way to do it, is to use [gomock](https://github.com/golang/mock)
+You are happily using `Notifier` in your application, but what about tests?
+You know, to test logic that has `Notifier` as a dependency. `Notifier` will probably call an external service, which is not available during tests.
+One way to do it, is to use [gomock](https://github.com/golang/mock).
 
-1. You can add a comment above the `Notifier` interface
+1. You can add a comment above the `Notifier` interface:
 
     ```golang
     //go:generate mockgen -source=notifier.go -destination=mock/notifier_mock.go
@@ -94,6 +94,6 @@ One way to do it, is to use [gomock](https://github.com/golang/mock)
 3. Use the generated mock in your tests.
    {{%alert warning%}}Remember not to call a real Notifier Constructor{{%/alert%}}
 
-Mortar includes mocks of all of it Interfaces in their respective directories, for example a [Logger](https://github.com/go-masonry/mortar/tree/master/interfaces/log/mock) mock.
+Mortar includes mocks of all of its interfaces in their respective directories, for example a [Logger](https://github.com/go-masonry/mortar/tree/master/interfaces/log/mock) mock.
 
 You can find several test examples [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/controllers/workshop_test.go).

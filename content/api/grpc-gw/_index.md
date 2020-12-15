@@ -4,17 +4,17 @@ date: 2020-12-09T10:41:15+02:00
 draft: true
 ---
 
-Mortar comes with a [gRPC-Gateway](https://github.com/grpc-ecosystem/grpc-gateway) which is a reverse-proxy that translates a RESTful HTTP API into gRPC.
+Mortar comes with a [gRPC-Gateway](https://github.com/grpc-ecosystem/grpc-gateway), which is a reverse-proxy that translates a RESTful HTTP API into gRPC.
 We will show how you should register its handlers, after you generate them from the proto files.
 
 ### Register `grpc-gateway` Handlers
 
 {{%notice%}}Before reading this part, get yourself familiar with the gRPC API [counterpart](/api/grpc).{{%/notice%}}
 
-If you read the gRPC part, you simply need to add one [function](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L49) to `Uber-FX` graph.
-This function should return a slice of [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar/blob/master/interfaces/http/server/interfaces.go#L55).
+If you've read the gRPC part, you simply need to add one [function](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L49) to `Uber-FX` graph.
+This function should return a slice of [GRPCGatewayGeneratedHandlers](https://pkg.go.dev/github.com/go-masonry/mortar/interfaces/http/server#GRPCGatewayGeneratedHandlers).
 
-1. Register your `grpc-gateway` generated Handlers
+1. Register your `grpc-gateway` generated Handlers:
    {{%notice warning "Important" %}}Each handler function must register itself on the provided `runtime.ServeMux`{{%/notice%}}
 
    ```golang
@@ -29,7 +29,7 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://gi
    }
    ```
 
-2. Now tell `Uber-FX` about it and make sure it's added to [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L33) group.
+2. Now tell `Uber-FX` about it and make sure it's added to the [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L33) group.
    
    {{%notice%}}
    However, in this case our function doesn't return a single value, but an array of them.
@@ -45,4 +45,4 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://gi
    })
    ```
 
-3. Finally you need to add the above `fx.Option` to `Uber-FX` graph, as shown [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L39)
+3. Finally, you need to add the above `fx.Option` to `Uber-FX` graph, as shown [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L39).
