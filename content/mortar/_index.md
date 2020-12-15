@@ -8,6 +8,6 @@ hide:
  - toc
 ---
 
-Mortar comes with different design decisions, some of them good for you and some not. Remember you can always replace everything.
+Mortar comes with different design decisions, some of them good for you, and some are not. Remember you can always replace everything.
 
 {{%children style="card" %}}

@@ -25,13 +25,13 @@ InternalHTTPHandlerFunctions = partial.FxGroupInternalHTTPHandlerFunctions
 
 Similar to everything else in `Uber-FX`, to register a new instance into a `fx.Group` you need to create a Constructor.
 
-We will look at one of the internal handlers: [Build Information](https://github.com/go-masonry/mortar/blob/master/handlers/self.go#L38)
+We will look at one of the internal handlers: [Build Information](https://github.com/go-masonry/mortar/blob/master/handlers/self.go#L38).
 
 {{% panel header="Build Information"%}}
 
-In this example we want to register a new **Internal** [`"/<path>/<pattern>"` -> `http.HandlerFunc`] pair.
+In this example we want to register a new **internal** [`"/<path>/<pattern>"` -> `http.HandlerFunc`] pair.
 
-1. Let's start by defining a Constructor that will return `http.HandlerFunc`
+1. Let's start by defining a constructor that will return `http.HandlerFunc`:
 
     ```golang
     func (s *selfHandlerDeps) BuildInfo() http.HandlerFunc {
@@ -46,7 +46,7 @@ In this example we want to register a new **Internal** [`"/<path>/<pattern>"` ->
     ```
 
 2. Create an `HTTPHandlerPatternPair`.
-   This is the part where you define on what **path** this Handler will be served.
+   This is the part where you define on what **path** this handler will be served:
     ```golang
     // SelfHandlers this service information handlers
     func SelfHandlers(deps selfHandlerDeps) []partial.HTTPHandlerPatternPair {
