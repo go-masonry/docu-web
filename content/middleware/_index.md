@@ -25,8 +25,9 @@ Some of them are bundled as part of the libraries Mortar uses, others defined by
     - Server HTTP middleware.
     {{%notice secondary%}}There are no `http.Handler` interceptors bundled with Mortar. It's better to use the gRPC layer for that, but you can always add your own.{{%/notice%}}
     - Client.
-    {{%notice success%}}Mortar introduces a way to add interceptors to `http.Client`, [here](https://github.com/go-masonry/mortar/blob/master/interfaces/http/client/interfaces.go#L21) you can see how it's defined.{{%/notice%}}
+    {{%notice success%}}Mortar introduces a way to add interceptors to `http.Client`, [here](https://pkg.go.dev/github.com/go-masonry/mortar/interfaces/http/client#HTTPClientInterceptor) you can see how it's defined.{{%/notice%}}
       - [Tracing](https://github.com/go-masonry/mortar/blob/master/middleware/interceptors/trace/client.go#L44) `HTTPClientInterceptor`, similar to the gRPC one, but for HTTP.
+      - Request/Response [dump interceptor](https://pkg.go.dev/github.com/go-masonry/mortar@v0.1.6/middleware/interceptors/client#DumpRESTClientInterceptor), for debugging purposes.
       - In Workshop Demo there is a special [TEST](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/controllers/workshop_test.go#L164) Interceptor that returns a custom response.
 
 ### Other types of middleware
