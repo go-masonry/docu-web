@@ -1,6 +1,5 @@
 ---
 title: "Telemetry"
-date: 2020-12-06T09:43:50+02:00
 draft: true
 ---
 
