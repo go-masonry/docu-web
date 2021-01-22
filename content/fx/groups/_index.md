@@ -6,7 +6,7 @@ draft: true
 `Uber-FX` [group](https://pkg.go.dev/go.uber.org/fx#hdr-Value_Groups) is a feature that allows you to consume and produce
 multiple values of the same type. This makes it easier to influence/configure different instances.
 
-Mortar has different [groups](https://github.com/go-masonry/mortar/blob/master/providers/groups/alias.go), but we will focus on one of them here.
+Mortar has different [groups](https://pkg.go.dev/github.com/go-masonry/mortar/providers/groups), but we will focus on one of them here.
 
 {{% panel header="Internal HTTP Handlers" %}}
 

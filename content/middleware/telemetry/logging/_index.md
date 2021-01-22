@@ -129,3 +129,18 @@ Every `ContextExtractor` known to `Uber-FX` which is labeled with `loggerContext
     ```
 
 {{%/panel%}}
+
+Once everything is configured and provided you should see Tracing information in every log, regardless if it's sampled or not.
+
+```shell
+6:48PM DBG app/services/workshop.go:48 > accepting car app=workshop car={"body_style":2,"color":"blue","number":"12345679","owner":"me myself"} git=9f00a9c host=Tals-Mac-mini.lan parentSpanId=0 sampled=true spanId=4b71de0edc5b6d18 traceId=4b71de0edc5b6d18 version=v1.2.3
+
+6:48PM DBG app/controllers/workshop.go:50 > car accepted app=workshop git=9f00a9c host=Tals-Mac-mini.lan parentSpanId=0 sampled=true spanId=4b71de0edc5b6d18 traceId=4b71de0edc5b6d18 version=v1.2.3
+```
+
+As you see above there are **2 logs**, one is called from `app/services/...` the other from `app/controllers/...`.
+
+Both of these logs have the same `traceId=4b71de0edc5b6d18`.
+If you'll [forward](/middleware/telemetry/tracing/#clients) this tracing information to another remote service you will see the same `traceId=4b71de0edc5b6d18` in that service logs as well.
+
+Now you can aggregate them in your Logging solution and you will see all the logs related to that `traceId` from different services.

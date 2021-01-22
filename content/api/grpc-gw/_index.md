@@ -29,7 +29,7 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://pk
    ```
 
 2. Now tell `Uber-FX` about it and make sure it's added to the [GRPCGatewayGeneratedHandlers](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/workshop.go#L33) group.
-   
+
    {{%notice%}}
    However, in this case our function doesn't return a single value, but an array of them.
    By default `Uber-FX` will treat it as an Array of Arrays `[][]GRPCGatewayGeneratedHandlers`.
@@ -39,9 +39,43 @@ This function should return a slice of [GRPCGatewayGeneratedHandlers](https://pk
    ```golang
    // GRPC Gateway Generated Handlers registration
    fx.Provide(fx.Annotated{
-    Group:  groups.GRPCGatewayGeneratedHandlers + ",flatten", // "flatten" does this [][]serverInt.GRPCGatewayGeneratedHandlers -> []serverInt.GRPCGatewayGeneratedHandlers
+    // "flatten" does this [][]serverInt.GRPCGatewayGeneratedHandlers -> []serverInt.GRPCGatewayGeneratedHandlers
+    Group:  groups.GRPCGatewayGeneratedHandlers + ",flatten",
     Target: workshopGRPCGatewayHandlers,
    })
    ```
 
 3. Finally, you need to add the above `fx.Option` to `Uber-FX` graph, as shown [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/main.go#L39).
+
+## REST Enabled
+
+You now have an RESTful reverse-proxy that automatically translates REST API calls to their gRPC counterparts.
+Following this guide, your REST API will be exposed on `5381` port.
+
+```http
+POST /v1/workshop/cars HTTP/1.1
+Accept: application/json, */*;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 88
+Content-Type: application/json
+Host: localhost:5381
+
+{
+    "body_style": "HATCHBACK",
+    "color": "blue",
+    "number": "12345679",
+    "owner": "me myself"
+}
+
+
+HTTP/1.1 200 OK
+Content-Length: 2
+Content-Type: application/json
+Date: Thu, 21 Jan 2021 11:54:47 GMT
+Grpc-Metadata-Content-Type: application/grpc
+
+{}
+```
+
+As you can see above **grpc-gateway** did a great job.

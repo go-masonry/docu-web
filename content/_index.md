@@ -15,11 +15,10 @@ The key features are:
 - [Middleware concept](/middleware) is almost everywhere.
   - [Build-in](/middleware) Server/Client Interceptors both for gRPC/HTTP, you can bring your own.
   - [Telemetry](/middleware/telemetry) - Metrics, Tracing and Logging all connected.
+- Pimped gRPC and HTTP [clients](/clients).
 - Increases Developer Velocity
 - DevOps friendly and Production ready.
   - [Builder pattern](/mortar/builders)
   - Profiling, Debug, Build Info, Configuration and [more](https://github.com/go-masonry/mortar/tree/master/handlers).
 
 The simplest way to start is to clone the [Demo](https://github.com/go-masonry/mortar-demo) repository.
-
-{{%notice secondary%}}This documentation is a WIP{{%/notice%}}

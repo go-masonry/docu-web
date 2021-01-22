@@ -40,3 +40,7 @@ name = "Discussions"
 identifier = "discussions"
 url = "https://github.com/go-masonry/mortar/discussions"
 weight = 30
+
+[[resources]]
+  name = "tracing"
+  src = "static/tagslogs.png"
