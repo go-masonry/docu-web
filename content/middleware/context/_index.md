@@ -95,3 +95,5 @@ func extractFromSpanContext(ctx jaeger.SpanContext) map[string]interface{} {
 ```
 
 If there is a Trace Span within the Context, we will include its information in the log entry.
+
+For additional information about Logging, Context and Telemetry read [here](/middleware/telemetry/logging).

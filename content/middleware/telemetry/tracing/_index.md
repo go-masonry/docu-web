@@ -77,7 +77,7 @@ Knowing what HTTP headers have this value depends on the Implementing Tracing li
 To better understand how `MetadataTraceCarrierOption` works [read this](https://pkg.go.dev/github.com/go-masonry/mortar/http/server#MetadataTraceCarrierOption)
 {{%/notice%}}
 
-You can a look at a working example [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/http.go#L17).
+You can look at a working example [here](https://github.com/go-masonry/mortar-demo/blob/master/workshop/app/mortar/http.go#L17).
 
 ### Clients
 

@@ -1,5 +1,4 @@
 ---
-title: "Mortar Documentation"
 draft: true
 hide:
     - toc

@@ -1,13 +1,25 @@
 baseURL = "https://go-masonry.github.io/"
-languageCode = "en-us"
-title = "Mortar Documentation"
-
+title = "Mortar"
 theme = "docuport"
+
+languageCode = "en-us"
+DefaultContentLanguage = "en"
+pygmentsCodeFences = true
+pygmentsStyle = "monokai"
+
+defaultContentLanguageInSubdir= false
+enableMissingTranslationPlaceholders = false
+
+disableKinds = ["taxonomy", "taxonomyTerm", "category", "RSS"]
+
+# Keep this as is
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
 
 [params]
 color_main="blue"
 color_second="#68829E"
-disableSearch = true
+# disableSearch = true
 
 # Code highlight configuration
 [markup.highlight]
