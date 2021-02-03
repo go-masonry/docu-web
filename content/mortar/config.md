@@ -55,7 +55,7 @@ its value is going to be used first.
 
 As mentioned previously, the default delimiter is `.`. However, when naming environment variables you can't use `.`.
 It is expected the that chosen implementation will allow you to configure a delimiter *replacer*.
-If you choose to use [viper](https://github.com/spf13/viper) using [brick wrapper](https://github.com/go-masonry/bviper),
+If you choose to use [viper](https://github.com/spf13/viper) using the [brick wrapper](https://github.com/go-masonry/bviper),
 by default there is a replacer that will replace the `_` delimiter to `.` used in our code.
 
 This is better explained with an example. Look at the map below:
@@ -72,7 +72,7 @@ Let's say you want to change port value from 5380 to 7777. You can change the fi
 Viper allows you to override configuration values with a matching environment variable. In our case:
 
 {{%panel%}}
-```shell script
+```shell
 export MORTAR_SERVER_GRPC_PORT="7777"
 ```
 {{%/panel%}}

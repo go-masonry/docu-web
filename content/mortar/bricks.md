@@ -24,7 +24,7 @@ You are encouraged to have a look at each library, but I can assure you, all of 
 Mortar after all is a library, and its purpose to be used in many projects.
 That is why we defined different [interfaces](https://pkg.go.dev/github.com/go-masonry/mortar/interfaces).
 
-{{%alert%}}We define a Brick as an implementation of an interface defined in Mortar using ann external library{{%/alert%}}
+{{%alert%}}We define a Brick as an implementation of an interface defined in Mortar using an external library{{%/alert%}}
 
 - [Mortar Logger](https://github.com/go-masonry/mortar/blob/master/interfaces/log/interfaces.go)
     - [Implementation using Zerolog](https://github.com/go-masonry/bzerolog)

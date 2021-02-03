@@ -20,7 +20,7 @@ Mortar comes with some useful client Interceptors both for gRPC and HTTP, they a
 
 Mortar introduces a way to add Interceptors to a default `http.Client`.
 
-If we look at `http.Client` struct we will find a `RoundTripper` it is the Interface we exploit.
+If we look at `http.Client` struct we will find a `RoundTripper` there.
 
 ```golang
 // Transport specifies the mechanism by which individual
@@ -47,13 +47,15 @@ type HTTPHandler func(*http.Request) (*http.Response, error)
 type HTTPClientInterceptor func(*http.Request, HTTPHandler) (*http.Response, error)
 ```
 
+You can see that `HTTPHandler` signature is very similar to `RoundTrip(*Request) (*Response, error)`...
+
 That's everything we need to enable HTTP Client interceptors.
 
 ### Dump
 
 When we create an HTTP Request we use different Structs and Functions, but we don't set `Content-Length` Header for example.
-[Dumping Utilities](https://golang.org/pkg/net/http/httputil/#DumpRequest) allows you to see what is actually sent and what is actually received.
-Mortar comes with HTTP Client Interceptor that dumps(logs) the actual **request** and **response**.
+[Dumping Utilities](https://golang.org/pkg/net/http/httputil/#DumpRequest) allow you to see what is actually sent and what is actually received.
+Mortar comes with an HTTP Client Interceptor that dumps(logs) the actual **request** and **response**.
 
 ```golang
 func DumpRESTClientInterceptor(deps dumpHTTPDeps) client.HTTPClientInterceptor {
@@ -73,7 +75,7 @@ func DumpRESTClientInterceptor(deps dumpHTTPDeps) client.HTTPClientInterceptor {
 ## GRPC Client Interceptor
 
 GRPC Interceptors are part of the `gRPC` [package](https://pkg.go.dev/google.golang.org/grpc#UnaryClientInterceptor) already.
-Besides mentioning it Mortar have nothing to add.
+Besides mentioning it Mortar has nothing to add.
 
 ## Registering
 

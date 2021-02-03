@@ -48,7 +48,7 @@ When your services are deployed in some cloud, you need different ways to "look"
     - Flags provided when your service was started:
 
         ```shell
-        service config <path to file> --answer-to-everythig=42
+        service config <path to file> --answer-to-everything=42
         ```
 
     - Or [Debug](https://github.com/go-masonry/mortar/blob/master/handlers/debug.go#L45) them.

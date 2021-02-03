@@ -23,7 +23,7 @@ type GRPCClientConnectionBuilder interface {
 ```
 
 {{%panel header="**GRPCClientConnectionWrapper** explained" theme="info"%}}
-`GRPCClientConnectionWrapper.Dial` method is very similar to a one defined in [gRPC client](https://pkg.go.dev/google.golang.org/grpc#DialContext).
+`GRPCClientConnectionWrapper.Dial` method is very similar to one defined in [gRPC client](https://pkg.go.dev/google.golang.org/grpc#DialContext).
 
 ```golang
 func DialContext(ctx context.Context, target string, opts ...DialOption) (conn *ClientConn, err error)
@@ -36,7 +36,7 @@ Lately gRPC project added `grpc.ClientConnInterface` to help them in tests, but 
 
 Mortar provides a Builder interface that allows you to add different Options before creating a connection.
 While you can create one yourself, Mortar comes with predefined [Client Builders](https://pkg.go.dev/github.com/go-masonry/mortar/providers#HTTPClientBuildersFxOption).
-You just need to make sure it's registered/provided in Uber-Fx.
+You just need to make sure they're registered/provided in Uber-Fx.
 
 {{%notice%}}`HTTPClientBuildersFxOption` is used for both gRPC and HTTP Clients.{{%/notice%}}
 

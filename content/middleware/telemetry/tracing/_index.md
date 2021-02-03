@@ -53,7 +53,7 @@ It also returns a context.Context object built around the returned span._
 
 That's great for **gRPC communication**, since everything will be found inside a `Context`.
 But what if your REST API is called ?
-Given that REST API is a reverse-proxy to your gRPC API, unless properly treated, the above code will create a new Server Span even if there is a Tracing Information (usually found within HTTP Headers).
+Given that REST API is a reverse-proxy to your gRPC API, unless properly treated, the above code will create a new Server Span even if there is Tracing Information (usually found within HTTP Headers).
 To fix that we need to **inject** any tracing information into our Context.
 
 {{%notice%}}Unless you really have to, it's best to handle everything on the gRPC layer.{{%/notice%}}
