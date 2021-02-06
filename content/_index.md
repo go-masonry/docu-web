@@ -5,6 +5,7 @@ hide:
 ---
 
 Mortar is a Go framework/library for building gRPC (and REST) web services.
+
 It has out-of-the-box support for configuration, application metrics, logging, tracing, profiling, dependency injection and more.
 
 The key features are:
@@ -19,5 +20,8 @@ The key features are:
 - DevOps friendly and Production ready.
   - [Builder pattern](/mortar/builders)
   - Profiling, Debug, Build Info, Configuration and [more](https://github.com/go-masonry/mortar/tree/master/handlers).
+  - Create a production ready service in 15min using this [service template](https://github.com/go-masonry/mortar-template).
 
-The simplest way to start is to clone the [Demo](https://github.com/go-masonry/mortar-demo) repository.
+{{%notice success%}}
+If you want to better understand Mortar features, clone the [Demo](https://github.com/go-masonry/mortar-demo) repository and follow the README there.
+{{%/notice%}}

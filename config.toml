@@ -36,22 +36,28 @@ color_second="#68829E"
     tabWidth = 4
 
 [[menu.shortcuts]]
-name = "Github"
-identifier = "mortar"
-url = "https://github.com/go-masonry/mortar"
-weight = 20
-
-[[menu.shortcuts]]
 name = "Demo"
 identifier = "demo"
 url = "https://github.com/go-masonry/mortar-demo"
 weight = 10
 
 [[menu.shortcuts]]
+name = "Template"
+identifier = "template"
+url = "https://github.com/go-masonry/mortar-template"
+weight = 20
+
+[[menu.shortcuts]]
+name = "Github"
+identifier = "mortar"
+url = "https://github.com/go-masonry/mortar"
+weight = 30
+
+[[menu.shortcuts]]
 name = "Discussions"
 identifier = "discussions"
 url = "https://github.com/go-masonry/mortar/discussions"
-weight = 30
+weight = 40
 
 [[resources]]
   name = "tracing"
